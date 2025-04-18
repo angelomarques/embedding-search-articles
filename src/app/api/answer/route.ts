@@ -1,4 +1,5 @@
-import { articles } from "@/data/articles";
+import connectDB from "@/lib/mongodb";
+import Article from "@/models/Article";
 import { Message } from "@/types";
 import { findRelevantArticles } from "@/utils/embeddings";
 import { GoogleGenAI } from "@google/genai";
@@ -19,6 +20,9 @@ export async function POST(request: Request) {
     const ai = new GoogleGenAI({
       apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "",
     });
+
+    await connectDB();
+    const articles = await Article.find({}).select('-embedding');
 
     // Find relevant articles
     const relevantArticles = await findRelevantArticles(input, articles);
