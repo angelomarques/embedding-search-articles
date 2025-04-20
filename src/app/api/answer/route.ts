@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     });
 
     await connectDB();
-    const articles = await Article.find({}).select('-embedding');
+    const articles = await Article.find({}).select("-embedding");
 
     // Find relevant articles
     const relevantArticles = await findRelevantArticles(input, articles);
@@ -57,7 +57,7 @@ Please provide a clear answer and cite the specific articles you used.`;
       content: text,
       role: "assistant",
       references: relevantArticles.map((article) => ({
-        articleId: article.id,
+        articleId: article._id,
         excerpt: article.content.substring(0, 200) + "...",
         title: article.title,
         author: article.author,
