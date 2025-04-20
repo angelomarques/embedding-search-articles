@@ -1,9 +1,10 @@
 export interface Article {
-  id: string;
+  _id: string;
   title: string;
   author: string;
   content: string;
   embedding?: number[];
+  url?: string;
 }
 
 export interface Message {

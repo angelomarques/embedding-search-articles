@@ -12,7 +12,7 @@ export async function generateEmbedding(text: string): Promise<number[]> {
     // config: {
     //   taskType: "QUESTION_ANSWERING",
     // },
-    config: { outputDimensionality: 10 },
+    config: { outputDimensionality: 700 },
   });
   return result.embeddings ? result.embeddings[0].values || [] : [];
 }
