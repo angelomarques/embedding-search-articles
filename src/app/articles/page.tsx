@@ -16,15 +16,18 @@ export default function ArticlesPage() {
   const queryClient = useQueryClient();
 
   function handleUploadComplete(data: any) {
-    toast.promise(() => createArticle(data), {
-      success: () => {
-        queryClient.invalidateQueries({ queryKey: ["articles"] });
+    toast.promise(
+      () => createArticle({ ...data, author: data?.author ?? "No author" }),
+      {
+        success: () => {
+          queryClient.invalidateQueries({ queryKey: ["articles"] });
 
-        return "Articles created successfully";
-      },
-      error: (err) => `Error creating articles: ${err}`,
-      loading: "Creating articles...",
-    });
+          return "Articles created successfully";
+        },
+        error: (err) => `Error creating articles: ${err}`,
+        loading: "Creating articles...",
+      }
+    );
   }
 
   return (
