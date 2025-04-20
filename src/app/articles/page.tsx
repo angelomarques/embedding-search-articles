@@ -1,8 +1,10 @@
 "use client";
+import { buttonVariants } from "@/components/ui/button";
 import { createArticle } from "@/service/articles/mutations";
 import { getArticles } from "@/service/articles/queries";
 import { UploadButton } from "@/utils/uploadthing";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 import { toast } from "sonner";
 
 export default function ArticlesPage() {
@@ -28,10 +30,26 @@ export default function ArticlesPage() {
   return (
     <main className="min-h-screen p-4">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold">Articles</h1>
-        <p className="mt-2 text-gray-600">
-          Here you can find a list of available articles.
-        </p>
+        <div className="flex justify-between">
+          <div className="">
+            <h1 className="text-3xl font-bold">Articles</h1>
+            <p className="mt-2 text-gray-600">
+              Here you can find a list of available articles.
+            </p>
+          </div>
+
+          {/* chat link button */}
+          <div className="flex items-center">
+            <Link
+              href="/"
+              className={buttonVariants({
+                variant: "secondary",
+              })}
+            >
+              Chat with AI
+            </Link>
+          </div>
+        </div>
       </div>
       <div className="max-w-4xl mx-auto mt-8">
         <UploadButton
