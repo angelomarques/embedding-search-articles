@@ -5,6 +5,8 @@ import { findRelevantArticles } from "@/utils/embeddings";
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
+export const maxDuration = 35; // This function can run for a maximum of 5 seconds
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
